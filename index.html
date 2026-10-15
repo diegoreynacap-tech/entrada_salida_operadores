@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>OJO DE HALCÓN · Primicia Exclusiva · Formularios HTML</title>
+<title>OJO DE HALCÓN · Primicia Exclusiva · Java: Entrada, Salida y Operadores</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Special+Elite&family=Courier+Prime:wght@400;700&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -417,13 +417,13 @@ Antes de salir corriendo, completá tu <span class="dato">FICHA DE PERSECUCIÓN<
   <div class="recorte" id="nvLog"></div>
   <div id="nvTeoria"></div>
   <div class="lab">
-    <h3>🖊 REDACTÁ TU CUESTIONARIO</h3>
+    <h3>🖊 ESCRIBÍ TU PROGRAMA JAVA</h3>
     <div class="consigna" id="nvConsigna"></div>
     <div class="checklist-memoria" id="checklistMemoria" style="display:none"></div>
     <div class="editor-marco">
       <div class="editor-barra">
         <span class="punto p1"></span><span class="punto p2"></span><span class="punto p3"></span>
-        <span class="nom" id="nvArchivo">libreta.html</span>
+        <span class="nom" id="nvArchivo">Main.java</span>
       </div>
       <div class="editor-zona">
         <pre id="edHl" aria-hidden="true"></pre>
@@ -431,13 +431,13 @@ Antes de salir corriendo, completá tu <span class="dato">FICHA DE PERSECUCIÓN<
       </div>
     </div>
     <div class="fila-lab">
-      <button class="btn-verificar" id="btnVerificar" type="button">🔍 Revisar Notas</button>
-      <button class="btn-preview" id="btnPreview" type="button">👁 Vista Previa</button>
+      <button class="btn-verificar" id="btnVerificar" type="button">🔍 Revisar Código</button>
+      <button class="btn-preview" id="btnPreview" type="button">🖥 Ver salida de ejemplo</button>
       <button class="btn-preview" id="btnReiniciar" type="button">↺ Reiniciar</button>
     </div>
     <div class="preview-marco" id="pvMarco">
-      <div class="pv-cab">// Así se vería tu formulario //</div>
-      <iframe id="pvFrame" title="Vista previa del código"></iframe>
+      <div class="pv-cab">// Así se vería la salida en la consola //</div>
+      <pre class="cod noselect" id="pvFrame" style="margin:0; border-radius:0; min-height:120px"></pre>
     </div>
     <div class="chequeos" id="nvChequeos"></div>
   </div>
@@ -509,11 +509,11 @@ Ya volviste con la nota completa. La edición de mañana está asegurada.
 
 <button id="btnPdf" type="button" title="Descargar Expediente PDF">📸</button>
 
-<footer>&lt;OJO DE HALCÓN/&gt; · Primicia Exclusiva · Formularios HTML · Ciencias de la Computación · Ceibal · Uruguay</footer>
+<footer>&lt;OJO DE HALCÓN/&gt; · Primicia Exclusiva · Java: Entrada, Salida y Operadores · Ciencias de la Computación · Ceibal · Uruguay</footer>
 <script>
 // ============================================================
 // PRIMICIA EXCLUSIVA · MOTOR JAVASCRIPT
-// Formularios HTML · Ciencias de la Computación · Ceibal
+// Java: Entrada, Salida y Operadores · Ciencias de la Computación · Ceibal
 // ============================================================
 
 // ============= ESTADO DEL ENTREVISTADO (PERSONALIZACIÓN) =============
@@ -537,192 +537,658 @@ function narrar(texto) {
 
 // ============= DATOS DE LAS 8 UBICACIONES + LABORATORIO =============
 const NIVELES = [
-{
-    id: 'u1', num: 'PISTA 01', titulo: 'El Supermercado', icono: '🛒',
-    tema: 'Datos básicos con &lt;input text&gt; y &lt;label&gt;', xp: 100,
-    log: 'Un llamado corta la estática: "Pasillo 7. Lácteos. Ahora." Entrás con un carrito vacío, disimulando. Ahí está {NOMBRE}, revisando la fecha de un yogur, sin sospechar nada.',
-    teoria: [
-        {h: '¿Qué son &lt;input&gt; y &lt;label&gt;?', p: 'El &lt;label&gt; es el <b>texto que describe</b> qué va en un campo. El &lt;input&gt; es el <b>campo en sí</b>. Se conectan con <code class="inl">for</code> e <code class="inl">id</code>: así, al hacer clic en el label, el cursor salta directo al input.'},
-        {c: '&lt;label for="numeroLibreta"&gt;Número de tu libreta de reportero/a&lt;/label&gt;\n&lt;input type="text" id="numeroLibreta" name="numeroLibreta"&gt;'},
-        {p: 'Fijate: <code class="inl">for="numeroLibreta"</code> en el label coincide EXACTO con <code class="inl">id="numeroLibreta"</code> en el input. Sin esa coincidencia, no están conectados.'},
-        {d: '🔍 Regla de oro: todo input necesita su label conectado. Sin excusas — es lo que hace que un formulario sea accesible.'}
-    ],
-    consigna: 'No podés escribir la nota si tu propia libreta es un desastre de datos sueltos: cada dato necesita quedar identificado con claridad, para vos y para quien la lea después.\n\n🎯 Qué hacer: creá <b>3 campos de texto</b> (&lt;input type="text"&gt;) para anotar:\n- Nombre del famoso/a que viste\n- Tu alias de reportero/a\n- Qué estaba haciendo {TRATO} en ese momento\n\nA cada uno ponele su &lt;label&gt; con el atributo <code class="inl">for</code> apuntando al <code class="inl">id</code> del input correspondiente: eso es lo que conecta el texto descriptivo con su casillero, para que quede claro qué va en cada uno (y para que, al tocar el texto, el cursor salte directo ahí).\n\nAdemás, sumá este campo tal cual (no lo modifiques) — así entendés qué hace <code class="inl">readonly</code>: deja LEER el campo pero no editarlo, ideal para un dato que nadie debería poder tocar:\n<code class="inl">&lt;label for="fuente"&gt;Fuente del dato&lt;/label&gt;\n&lt;input type="text" id="fuente" name="fuente" readonly value="🤐 CONFIDENCIAL"&gt;</code>',
-    inicial: '&lt;!-- Tu ficha del avistamiento en el supermercado --&gt;\n',
-    checks: [
-        ['<label[^>]*for\\s*=\\s*["\']([\\w-]+)["\']', 'Al menos 3 &lt;label&gt; con atributo for', 3, false],
-        ['<input[^>]*type\\s*=\\s*["\']text["\']', 'Al menos 3 &lt;input type="text"&gt;', 3, false],
-        ['<input[^>]*id\\s*=\\s*["\']', 'Cada input necesita id (para conectar con el label)', 3, false],
-        ['readonly', 'El campo "Fuente" debe llevar el atributo readonly', 1, false],
-        ['CONFIDENCIAL', 'El campo "Fuente" debe decir CONFIDENCIAL — no se toca', 1, false]
-    ],
-    exito: '✔ Ficha del supermercado completa. El carrito quedó abandonado en el pasillo 7, pero valió la pena.'
-},
-{
-    id: 'u2', num: 'PISTA 02', titulo: 'Arriba de una Boya', icono: '⚓',
-    tema: 'Fecha y hora con &lt;input date&gt; y &lt;input time&gt;', xp: 100,
-    log: 'La pista decía "sale a navegar los sábados al amanecer". No decía que terminarías trepado/a a una boya oxidada, con el agua helada en los tobillos. Ahí viene el barco de {NOMBRE}.',
-    teoria: [
-        {h: '¿Qué son &lt;input type="date"&gt; y "time"?', p: 'Son inputs <b>especializados</b>: el navegador dibuja un selector de calendario o de reloj automáticamente. No hay forma de escribir una fecha inválida — el navegador lo impide solo.'},
-        {c: '&lt;label for="cumpleanos"&gt;Fecha de cumpleaños&lt;/label&gt;\n&lt;input type="date" id="cumpleanos" name="cumpleanos"&gt;'},
-        {p: 'El mismo patrón sirve para <code class="inl">type="time"</code>: cambiás el valor de <code class="inl">type</code> y el navegador dibuja el selector de reloj en vez del calendario, sin tocar nada más.'},
-        {p: 'Además podés limitar el rango con los atributos <code class="inl">min</code> y <code class="inl">max</code>: <code class="inl">min</code> fija el valor más chico permitido y <code class="inl">max</code> el más grande. Por ejemplo, para que nadie pueda cargar una fecha "del futuro" en ese mismo campo:'},
-        {c: '&lt;input type="date" id="cumpleanos" name="cumpleanos" min="1900-01-01" max="2026-09-04"&gt;'},
-        {d: '🔍 Cada tipo de input trae su propia validación gratis. Usar el tipo correcto — y sumar min/max cuando corresponda — ahorra trabajo (y errores).'}
-    ],
-    consigna: 'Una fecha o una hora escritas a mano libre son un problema: cualquiera puede tipear "30 de febrero" o "25:99" y tu ficha queda arruinada. Por suerte existen inputs especializados que no dejan escribir cualquier cosa.\n\n🎯 Qué hacer: registrá el avistamiento náutico con:\n- &lt;input type="date"&gt;: el navegador dibuja un calendario, así la fecha SIEMPRE queda en un formato válido\n- &lt;input type="time"&gt;: mismo criterio, pero con un selector de reloj, para anotar la hora exacta\n- &lt;input type="text"&gt;: para describir el tipo de embarcación (acá sí sirve el texto libre, porque no hay un formato fijo que validar)\n\nConectá los tres con su &lt;label for&gt; correspondiente — sin eso, quien lea tu ficha no sabe qué campo es cuál.',
-    inicial: '&lt;!-- Registro del avistamiento en el muelle --&gt;\n',
-    checks: [
-        ['<input[^>]*type\\s*=\\s*["\']date["\']', '&lt;input type="date"&gt; presente', 1, false],
-        ['<input[^>]*type\\s*=\\s*["\']time["\']', '&lt;input type="time"&gt; presente', 1, false],
-        ['<input[^>]*type\\s*=\\s*["\']text["\']', 'Un campo de texto para la embarcación', 1, false],
-        ['<label[^>]*for\\s*=\\s*["\']', 'Labels conectados con for', 3, false]
-    ],
-    exito: '✔ Sobreviviste a la boya. El teleobjetivo se mojó pero las notas están a salvo.'
-},
-{
-    id: 'u3', num: 'PISTA 03', titulo: 'El Locutorio de la Esquina', icono: '☎️',
-    tema: 'Contacto con &lt;input email&gt;, &lt;tel&gt; y &lt;url&gt;', xp: 100,
-    log: 'Te metés en el único locutorio abierto del barrio a llamar a tu contacto. Mientras esperás la línea, anotás en una servilleta todo lo que sabés de {NOMBRE}: mail, teléfono, y esa cuenta secreta que sospechás que usa.',
-    teoria: [
-        {h: '¿Qué son &lt;input email&gt;, &lt;tel&gt; y &lt;url&gt;?', p: 'Tres tipos de input pensados para <b>datos de contacto</b>. El navegador valida el formato automáticamente: un email sin arroba se marca como inválido antes de enviar el formulario.'},
-        {c: '&lt;label for="mailEditor"&gt;Email para mandar la nota&lt;/label&gt;\n&lt;input type="email" id="mailEditor" name="mailEditor"&gt;'},
-        {p: 'Los otros dos tipos siguen el mismo patrón, solo cambia el valor de <code class="inl">type</code>: <code class="inl">type="tel"</code> no valida un formato estricto (los teléfonos varían mucho según el país), pero en celulares abre el teclado numérico automáticamente. <code class="inl">type="url"</code> exige que el valor tenga forma de dirección web.'},
-        {d: '🔍 Elegir el tipo correcto de input mejora la experiencia sin escribir una sola línea de validación manual.'}
-    ],
-    consigna: 'Un dato de contacto mal escrito es un dato inútil: un mail sin arroba no le llega a nadie. Por eso existen tipos de input que validan el FORMATO del dato antes de enviarlo, sin que escribas una sola línea de código extra.\n\n🎯 Qué hacer: armá la ficha de contacto con:\n- &lt;input type="email"&gt;: exige que tenga forma de mail (algo@algo.algo) antes de dejar avanzar\n- &lt;input type="tel"&gt;: para un teléfono (no valida un formato estricto, pero en el celular abre el teclado numérico directamente)\n- &lt;input type="url"&gt;: para la supuesta cuenta secreta de {NOMBRE} — exige que tenga forma de dirección web\n\nConectá los tres con su &lt;label for&gt;, como en las pistas anteriores.',
-    inicial: '&lt;!-- Datos de contacto anotados en el locutorio --&gt;\n',
-    checks: [
-        ['<input[^>]*type\\s*=\\s*["\']email["\']', '&lt;input type="email"&gt; presente', 1, false],
-        ['<input[^>]*type\\s*=\\s*["\']tel["\']', '&lt;input type="tel"&gt; presente', 1, false],
-        ['<input[^>]*type\\s*=\\s*["\']url["\']', '&lt;input type="url"&gt; presente', 1, false],
-        ['<label[^>]*for\\s*=\\s*["\']', 'Labels conectados con for', 3, false]
-    ],
-    exito: '✔ La servilleta con los datos sobrevivió al café derramado. Contacto asegurado.'
-},
-{
-    id: 'u4', num: 'PISTA 04', titulo: 'La Azotea de Enfrente', icono: '🏢',
-    tema: 'Clasificar con &lt;select&gt;, &lt;option&gt; y &lt;optgroup&gt;', xp: 100,
-    log: 'Con los binoculares apoyados en el borde del edificio de enfrente, vigilás la oficina donde entró {NOMBRE}. No podés bajar corriendo por cualquier cosa: primero hay que clasificar bien qué está pasando ahí adentro.',
-    teoria: [
-        {h: '¿Qué son &lt;select&gt; y &lt;optgroup&gt;?', p: '&lt;select&gt; crea un <b>menú desplegable</b>. Cada &lt;option&gt; es una alternativa. Cuando hay muchas opciones, &lt;optgroup&gt; las <b>agrupa visualmente</b> por categoría.'},
-        {c: '&lt;label for="vehiculo"&gt;Vehículo de la fuga&lt;/label&gt;\n&lt;select id="vehiculo" name="vehiculo"&gt;\n  &lt;optgroup label="Terrestre"&gt;\n    &lt;option value="auto"&gt;Auto&lt;/option&gt;\n    &lt;option value="moto"&gt;Moto&lt;/option&gt;\n  &lt;/optgroup&gt;\n  &lt;optgroup label="Acuático"&gt;\n    &lt;option value="lancha"&gt;Lancha&lt;/option&gt;\n    &lt;option value="bote"&gt;Bote&lt;/option&gt;\n  &lt;/optgroup&gt;\n&lt;/select&gt;'},
-        {p: 'El &lt;optgroup label="..."&gt; no es seleccionable — solo organiza visualmente las &lt;option&gt; que tiene adentro.'},
-        {d: '🔍 &lt;select&gt; ahorra espacio en pantalla cuando hay muchas alternativas para elegir de a una.'}
-    ],
-    consigna: 'Escribir "estaba haciendo cosas" en tu libreta no sirve: necesitás elegir UNA categoría concreta de una lista cerrada de posibilidades, para que el dato sea comparable con los de otras pistas.\n\n🎯 Qué hacer: creá un &lt;select&gt; para clasificar la actividad observada (es el menú desplegable de opciones), con:\n- Al menos <b>2 &lt;optgroup&gt;</b> (por ejemplo "Trabajo" y "Ocio") — agrupan visualmente las opciones por categoría, para que el menú no sea una lista larga sin orden\n- Al menos <b>2 &lt;option&gt; dentro de cada optgroup</b> (4 en total) — son las alternativas reales que se pueden elegir\n- Su &lt;label for&gt; correspondiente',
-    inicial: '&lt;!-- Clasificación de la actividad observada --&gt;\n',
-    checks: [
-        ['<select', '&lt;select&gt; presente', 1, false],
-        ['<optgroup', 'Al menos 2 &lt;optgroup&gt;', 2, false],
-        ['<option', 'Al menos 4 &lt;option&gt; en total', 4, false],
-        ['<label[^>]*for\\s*=\\s*["\']', 'Label conectado al select', 1, false]
-    ],
-    exito: '✔ Clasificación completa. La azotea queda como puesto de vigilancia oficial.'
-},
-{
-    id: 'u5', num: 'PISTA 05', titulo: 'El Parque de Perros', icono: '🐕',
-    tema: 'Opciones únicas con &lt;fieldset&gt;, &lt;legend&gt; y &lt;radio&gt;', xp: 100,
-    log: 'Descubriste la rutina: todas las tardes {NOMBRE} pasea al perro por este parque. Te disfrazaste de paseador/a profesional —seis correas, ningún perro real— para camuflarte y anotar el humor del día.',
-    teoria: [
-        {h: '¿Qué son &lt;fieldset&gt;, &lt;legend&gt; y &lt;radio&gt;?', p: 'Los &lt;input type="radio"&gt; permiten elegir <b>solo una opción entre varias</b>. Para que funcionen como grupo, TODOS deben compartir el mismo <code class="inl">name</code>. &lt;fieldset&gt; agrupa visualmente el conjunto, y &lt;legend&gt; le pone título.'},
-        {c: '&lt;fieldset&gt;\n  &lt;legend&gt;Bebida favorita&lt;/legend&gt;\n  &lt;input type="radio" id="bebCola" name="bebida" value="cola"&gt;\n  &lt;label for="bebCola"&gt;Cola&lt;/label&gt;\n\n  &lt;input type="radio" id="bebNaranja" name="bebida" value="naranja"&gt;\n  &lt;label for="bebNaranja"&gt;Naranja&lt;/label&gt;\n&lt;/fieldset&gt;'},
-        {p: 'Fijate: <code class="inl">name="bebida"</code> es <b>igual en ambos radios</b> — por eso el navegador entiende que son mutuamente excluyentes (elegir uno desmarca el otro).'},
-        {d: '🔍 Radios con distinto name = grupos distintos que no se afectan entre sí. Es el error más común al usar radio buttons.'}
-    ],
-    consigna: 'Acá el dato es "elegí SOLO UNA opción entre varias" — no tiene sentido que {NOMBRE} esté "feliz" Y "serio" al mismo tiempo en tu ficha. Para eso existen los radios, pero solo funcionan como grupo si comparten el mismo nombre.\n\n🎯 Qué hacer: armá <b>dos grupos de radios</b>, cada uno dentro de su propio &lt;fieldset&gt; (agrupa visualmente el conjunto) con &lt;legend&gt; (le pone título al grupo):\n1. "Estado de ánimo observado" — mínimo 3 opciones\n2. "Tu disfraz de la misión" — mínimo 3 opciones (ej: paseador de perros, vendedor ambulante, turista perdido)\n\nLa parte que no podés olvidar: todos los radios de un mismo grupo necesitan el mismo <code class="inl">name</code> — es lo único que le dice al navegador "estas opciones son excluyentes entre sí".',
-    inicial: '&lt;!-- Radios: estado de ánimo y disfraz --&gt;\n',
-    checks: [
-        ['<fieldset', 'Al menos 2 &lt;fieldset&gt;', 2, false],
-        ['<legend', 'Cada fieldset necesita &lt;legend&gt;', 2, false],
-        ['<input[^>]*type\\s*=\\s*["\']radio["\']', 'Al menos 6 &lt;input type="radio"&gt; (3+3)', 6, false],
-        ['name\\s*=\\s*["\']\\w+["\']', 'Los radios necesitan name compartido', 2, false]
-    ],
-    exito: '✔ Ningún perro fue paseado en el proceso, pero el estado de ánimo quedó registrado.'
-},
-{
-    id: 'u6', num: 'PISTA 06', titulo: 'Zona de Arribos', icono: '✈️',
-    tema: 'Selección múltiple con &lt;checkbox&gt; y &lt;textarea&gt;', xp: 100,
-    log: '{NOMBRE} vuelve de gira. Te mezclás entre los que esperan con carteles —el tuyo dice "BIENVENIDO TÍO ROBERTO" para disimular— y registrás todo antes de que la seguridad te eche.',
-    teoria: [
-        {h: '¿Qué son &lt;checkbox&gt; y &lt;textarea&gt;?', p: 'A diferencia del radio, los &lt;input type="checkbox"&gt; son <b>independientes entre sí</b>: podés marcar todos, ninguno, o cualquier combinación. &lt;textarea&gt; es una caja de texto <b>de varias líneas</b>, ideal para respuestas largas.'},
-        {c: '&lt;input type="checkbox" id="queso" name="ingredientes" value="queso"&gt;\n&lt;label for="queso"&gt;Queso&lt;/label&gt;\n\n&lt;input type="checkbox" id="jamon" name="ingredientes" value="jamon"&gt;\n&lt;label for="jamon"&gt;Jamón&lt;/label&gt;\n\n&lt;label for="comentario"&gt;Comentario del pedido&lt;/label&gt;\n&lt;textarea id="comentario" name="comentario" rows="4" placeholder="Escribí acá..." maxlength="200"&gt;&lt;/textarea&gt;'},
-        {p: 'El atributo <code class="inl">maxlength</code> limita cuántos caracteres se pueden escribir. <code class="inl">placeholder</code> muestra un texto de ejemplo que desaparece al escribir.'},
-        {d: '🔍 Checkbox = elegí todas las que apliquen. Radio = elegí solo una. Confundirlos es un error clásico.'}
-    ],
-    consigna: 'Este dato es distinto al del parque de perros: {NOMBRE} puede llevar lentes Y gorra Y equipaje al mismo tiempo — no son opciones excluyentes. Para "elegí todas las que apliquen" se usa el checkbox, no el radio.\n\n🎯 Qué hacer:\n- Marcá con &lt;input type="checkbox"&gt; qué llevaba {NOMBRE} encima (mínimo 4 opciones: lentes de sol, gorra, equipaje de mano, guardaespaldas, etc.)\n- Describí la escena completa en un &lt;textarea&gt; (a diferencia del input de texto, permite varias líneas — ideal para un relato largo), con <code class="inl">placeholder</code> (un texto de ejemplo que guía qué escribir, y desaparece solo al tipear) y <code class="inl">maxlength</code> (un límite de caracteres, para que la descripción no se vaya de tema)',
-    inicial: '&lt;!-- Checkboxes y descripción del aeropuerto --&gt;\n',
-    checks: [
-        ['<input[^>]*type\\s*=\\s*["\']checkbox["\']', 'Al menos 4 &lt;input type="checkbox"&gt;', 4, false],
-        ['<textarea', '&lt;textarea&gt; presente', 1, false],
-        ['placeholder', 'El textarea debe tener placeholder', 1, false],
-        ['maxlength', 'El textarea debe tener maxlength', 1, false]
-    ],
-    exito: '✔ Saliste del aeropuerto antes de que te agarre seguridad. Notas a salvo.'
-},
-{
-    id: 'u7', num: 'PISTA 07', titulo: 'Feria de Choripanes', icono: '🎪',
-    tema: 'Datos numéricos con &lt;number&gt; y &lt;color&gt;', xp: 100,
-    log: 'La pista más rara hasta ahora: "va a estar en la feria, disfrazado/a de estatua viviente". Escondido/a detrás de un puesto de choripanes, contás cuánta gente se sacó foto con la "estatua" sin notar que pestañeaba.',
-    teoria: [
-        {h: '¿Qué son &lt;input number&gt; y &lt;color&gt;?', p: '&lt;input type="number"&gt; solo acepta valores numéricos (con flechitas para sumar/restar). &lt;input type="color"&gt; abre un <b>selector visual de color</b> nativo del navegador.'},
-        {c: '&lt;label for="sillas"&gt;Sillas vacías en la feria&lt;/label&gt;\n&lt;input type="number" id="sillas" name="sillas" min="0"&gt;\n\n&lt;label for="cartel"&gt;Color del cartel de bienvenida&lt;/label&gt;\n&lt;input type="color" id="cartel" name="cartel"&gt;'},
-        {p: 'El atributo <code class="inl">min="0"</code> impide números negativos — no tendría sentido "-3 sillas" vacías.'},
-        {d: '🔍 Cuanto más específico el tipo de input, menos trabajo de validación manual necesitás después.'}
-    ],
-    consigna: 'Una cantidad de personas no puede ser texto libre ni un número negativo — nadie "sacó -3 fotos". Y un color descrito con palabras ("un verde grisáceo pero más oscuro") es demasiado impreciso para una ficha seria.\n\n🎯 Qué hacer: registrá:\n- &lt;input type="number"&gt; con <code class="inl">min="0"</code>, para contar cuánta gente se sacó foto con la "estatua" sin saberlo — el atributo min bloquea los negativos\n- &lt;input type="color"&gt;, para el color exacto de la pintura corporal del disfraz — abre el selector visual de color del navegador, sin ambigüedad posible\n\nAmbos con su &lt;label for&gt;.',
-    inicial: '&lt;!-- Registro en la feria de choripanes --&gt;\n',
-    checks: [
-        ['<input[^>]*type\\s*=\\s*["\']number["\']', '&lt;input type="number"&gt; presente', 1, false],
-        ['min\\s*=\\s*["\']0["\']', 'El number debe tener min="0"', 1, false],
-        ['<input[^>]*type\\s*=\\s*["\']color["\']', '&lt;input type="color"&gt; presente', 1, false],
-        ['<label[^>]*for\\s*=\\s*["\']', 'Labels conectados', 2, false]
-    ],
-    exito: '✔ La "estatua" nunca se dio cuenta. Choripán de premio para vos.'
-},
-{
-    id: 'u8', num: 'PISTA 08', titulo: 'La Redacción', icono: '📰',
-    tema: 'Integración total con &lt;form&gt;, &lt;required&gt; y &lt;submit&gt;', xp: 100,
-    log: 'Volviste con la libreta llena y quince minutos antes del cierre. Ahora hay que convertir todo ese caos sobre {NOMBRE} en <b>una nota real</b>: un formulario completo y funcional, listo para publicar.',
-    teoria: [
-        {h: 'El &lt;form&gt; que lo une todo', p: 'Un &lt;form&gt; es el <b>contenedor</b> que agrupa todos los campos para que se envíen juntos. Sin el atributo <code class="inl">name</code> en cada campo, ese dato <b>no se envía</b> — el form no sabe cómo llamarlo.'},
-        {c: '&lt;form&gt;\n  &lt;label for="apodo"&gt;Tu apodo de reportero/a&lt;/label&gt;\n  &lt;input type="text" id="apodo" name="apodo" required&gt;\n\n  &lt;!-- más campos... --&gt;\n\n  &lt;button type="submit"&gt;Enviar&lt;/button&gt;\n&lt;/form&gt;'},
-        {p: 'El atributo <code class="inl">required</code> impide enviar el formulario si ese campo quedó vacío — el navegador avisa solo, sin escribir JavaScript.'},
-        {d: '🔍 Un formulario sin &lt;form&gt; no es un formulario — es solo un conjunto de inputs sueltos que no se pueden enviar juntos.'}
-    ],
-    consigna: 'Todos los inputs sueltos de las pistas anteriores no sirven de nada si no se pueden enviar JUNTOS como una sola nota. Para eso existe &lt;form&gt;: es el contenedor que agrupa todos los campos y los prepara para enviarse en conjunto.\n\n🎯 Qué hacer: armá el <b>formulario completo de la entrevista</b> a {NOMBRE}, integrando todo lo que aprendiste en las pistas anteriores:\n- Todo dentro de un único &lt;form&gt;\n- Al menos <b>10 campos/preguntas propias</b> combinando los tipos que ya usaste (text, email, date, select, radio, checkbox, textarea, number, color) — inventá preguntas nuevas para esta nota, no repitas literalmente las de otras pistas\n- <code class="inl">required</code> en al menos 3 campos clave — sin esto, el navegador deja enviar el formulario aunque falten datos importantes\n- Un &lt;button type="submit"&gt; al final que diga "Publicar Nota" — es el botón que efectivamente envía todo el form junto\n\nRecordá también: cada campo necesita su <code class="inl">name</code> para que ese dato viaje con el formulario. Sin name, el campo existe visualmente pero el form no sabe cómo llamarlo al enviarlo.',
-    inicial: '&lt;!-- El formulario completo de la entrevista --&gt;\n',
-    checks: [
-        ['<form', 'Un único &lt;form&gt; contenedor', 1, 1],
-        ['<input|<select|<textarea', 'Al menos 10 campos (input/select/textarea combinados)', 10, false],
-        ['required', 'Al menos 3 campos con required', 3, false],
-        ['<button[^>]*type\\s*=\\s*["\']submit["\']', '&lt;button type="submit"&gt; presente', 1, false],
-        ['name\\s*=\\s*["\']', 'Cada campo necesita name para poder enviarse', 8, false]
-    ],
-    mostrarChecklist: true,
-    exito: '✔ LA NOTA ESTÁ LISTA. Edición cerrada a tiempo. {NOMBRE} nunca sabrá cómo hiciste esto.'
-},
-{
-    id: 'ins', num: '🎬 ALFOMBRA ROJA', titulo: 'La Exclusiva del Siglo', icono: '🎬', xp: 350, insano: true,
-    log: 'Te infiltraste en el evento del año: smoking prestado, acreditación falsificada a mano, una sola oportunidad antes de que te descubran. Esta es la nota que te hace leyenda —o el final de tu carrera—. Nadie te va a guiar acá adentro.',
-    teoria: [
-        {h: 'Requisitos de la Alfombra Roja', p: 'Todo lo de las Pistas 1-8, PLUS componentes avanzados que vas a tener que investigar por tu cuenta.'},
-        {d: '🎬 &lt;input type="range"&gt;, &lt;datalist&gt;, &lt;fieldset&gt; anidados, &lt;input pattern&gt; con regex, &lt;input type="file"&gt;. Sin ejemplos de código esta vez — pero sí con la pista de para qué sirve cada uno.'}
-    ],
-    consigna: 'Formulario "Entrevista de Élite" a {NOMBRE}, sin red de seguridad — esta vez investigás la sintaxis por tu cuenta, pero sabé para qué sirve cada cosa:\n\n1. Todo lo de la Pista 08 (form completo, required, submit)\n2. &lt;input type="range"&gt; — un control deslizante, para responder "del 1 al 10, ¿qué tan arriesgada fue la infiltración?"\n3. &lt;datalist&gt; — sugerencias que aparecen mientras se escribe en un input, como un autocompletar\n4. &lt;fieldset&gt; anidados — un fieldset DENTRO de otro, para agrupar subcategorías dentro de una categoría más grande\n5. &lt;input pattern="@[A-Za-z0-9_]+"&gt; — valida que el usuario de red social tenga exactamente ese formato (arroba + letras/números/guion bajo), sin escribir JavaScript\n6. &lt;input type="file"&gt; — para adjuntar la foto borrosa que lograste sacar\n7. El campo de la Fuente (readonly, CONFIDENCIAL) intacto',
-    inicial: '&lt;!-- La Alfombra Roja: sin red de seguridad --&gt;\n',
-    checks: [
-        ['<form', '&lt;form&gt; contenedor', 1, 1],
-        ['<input[^>]*type\\s*=\\s*["\']range["\']', '&lt;input type="range"&gt; presente', 1, false],
-        ['<datalist', '&lt;datalist&gt; presente', 1, false],
-        ['<fieldset[^>]*>[\\s\\S]*?<fieldset', 'Fieldsets anidados', 1, false],
-        ['pattern\\s*=', 'Un input con atributo pattern', 1, false],
-        ['<input[^>]*type\\s*=\\s*["\']file["\']', '&lt;input type="file"&gt; presente', 1, false],
-        ['readonly', 'Campo Fuente sigue readonly', 1, false],
-        ['CONFIDENCIAL', 'Campo Fuente sigue diciendo CONFIDENCIAL', 1, false]
-    ],
-    exito: '✔ LA EXCLUSIVA DEL SIGLO. Tu nombre entra en la leyenda de Ojo de Halcón.'
-}
+ {
+  "id": "u1",
+  "num": "PISTA 01",
+  "titulo": "El Supermercado",
+  "icono": "🛒",
+  "tema": "Datos de salida: System.out.println y print",
+  "xp": 100,
+  "log": "Un llamado corta la estática: \"Pasillo 7. Lácteos. Ahora.\" Entrás con un carrito vacío, disimulando. Ahí está {NOMBRE}, revisando la fecha de un yogur, sin sospechar nada. Antes de acercarte, tu programa tiene que poder MOSTRAR en pantalla lo que viste.",
+  "teoria": [
+   {
+    "h": "¿Cómo muestra datos un programa Java?",
+    "p": "Un programa muestra información en la consola con <code class=\"inl\">System.out</code>. <code class=\"inl\">println</code> escribe el texto y <b>salta a la línea siguiente</b>; <code class=\"inl\">print</code> escribe el texto y <b>se queda en la misma línea</b>. El texto va siempre entre comillas dobles y cada instrucción termina con <code class=\"inl\">;</code>."
+   },
+   {
+    "c": "public class Main {\n  public static void main(String[] args) {\n    System.out.println(\"Pasillo 7\");\n    System.out.print(\"Lácteos \");\n    System.out.println(\"ahora\");\n  }\n}",
+    "s": "Pasillo 7\nLácteos ahora"
+   },
+   {
+    "p": "Todo programa Java arranca en el método <code class=\"inl\">main</code>. Las instrucciones que escribas entre sus llaves se ejecutan de arriba hacia abajo."
+   },
+   {
+    "d": "🔍 Regla de oro: cada instrucción termina en punto y coma y el texto va entre comillas dobles. Olvidar cualquiera de las dos es el error de compilación más común."
+   }
+  ],
+  "consigna": "Un reportero sin libreta es solo alguien parado en un pasillo de lácteos. Tu programa tiene que mostrar los datos del avistamiento.\n\n🎯 Qué hacer: dentro del <code class=\"inl\">main</code> escribí un programa que muestre en la consola:\n- Con <b>2 o más</b> <code class=\"inl\">System.out.println(...)</code>: el nombre de {NOMBRE} y el lugar donde {OBJETO} viste\n- Con <b>1 o más</b> <code class=\"inl\">System.out.print(...)</code>: una etiqueta como \"Hora: \" y, en otra instrucción, el valor, para comprobar que <code class=\"inl\">print</code> NO salta de línea\n\nRespetá las mayúsculas: <code class=\"inl\">System</code> con S mayúscula; <code class=\"inl\">out</code>, <code class=\"inl\">print</code> y <code class=\"inl\">println</code> en minúscula.",
+  "inicial": "public class Main {\n  public static void main(String[] args) {\n    // Tu código acá\n\n  }\n}\n",
+  "checks": [
+   [
+    "public\\s+static\\s+void\\s+main\\s*\\(",
+    "Método main presente",
+    1,
+    false
+   ],
+   [
+    "System\\.out\\.println\\s*\\(",
+    "Al menos 2 System.out.println(...)",
+    2,
+    false
+   ],
+   [
+    "System\\.out\\.print\\s*\\(",
+    "Al menos 1 System.out.print(...)",
+    1,
+    false
+   ],
+   [
+    "System\\.out\\.print(ln)?\\s*\\([^;]*\\)\\s*;",
+    "Cada instrucción de salida termina en punto y coma",
+    3,
+    false
+   ]
+  ],
+  "salida": "Avistado: {NOMBRE}\nLugar: Supermercado, pasillo 7\nHora: 18:40",
+  "exito": "✔ Programa compilado sin errores. El yogur de {NOMBRE} quedó para la historia."
+ },
+ {
+  "id": "u2",
+  "num": "PISTA 02",
+  "titulo": "Arriba de una Boya",
+  "icono": "⚓",
+  "tema": "Salida con formato: concatenación, \\n, \\t y printf",
+  "xp": 100,
+  "log": "La pista decía \"sale a navegar los sábados al amanecer\". No decía que terminarías trepado/a a una boya oxidada, con el agua helada en los tobillos. Ahí viene el barco de {NOMBRE} y tu programa tiene que mostrar el registro bien ordenado.",
+  "teoria": [
+   {
+    "h": "Concatenar, escapar y formatear",
+    "p": "Con el operador <code class=\"inl\">+</code> podés <b>pegar</b> textos y variables en una sola salida. Las <b>secuencias de escape</b> controlan el formato dentro de las comillas: <code class=\"inl\">\\n</code> salta de línea y <code class=\"inl\">\\t</code> inserta una tabulación. Y <code class=\"inl\">printf</code> arma la salida con <b>marcadores</b>: <code class=\"inl\">%s</code> para texto, <code class=\"inl\">%d</code> para enteros y <code class=\"inl\">%f</code> para decimales."
+   },
+   {
+    "c": "String barco = \"Gaviota\";\nint pasajeros = 4;\nSystem.out.println(\"Barco: \" + barco);\nSystem.out.printf(\"Lleva %d pasajeros%n\", pasajeros);\nSystem.out.println(\"Hora:\\t06:30\\nRumbo:\\tNorte\");",
+    "s": "Barco: Gaviota\nLleva 4 pasajeros\nHora:\t06:30\nRumbo:\tNorte"
+   },
+   {
+    "p": "A diferencia de <code class=\"inl\">println</code>, <code class=\"inl\">printf</code> NO salta de línea por sí solo: hay que pedirlo con <code class=\"inl\">%n</code> (o con <code class=\"inl\">\\n</code>) dentro del texto."
+   },
+   {
+    "d": "🔍 En printf, la cantidad de marcadores (%s, %d...) tiene que coincidir con la cantidad de valores que pasás después de la coma, y en el mismo orden."
+   }
+  ],
+  "consigna": "Un registro desordenado es inútil. Mostrá la ficha del avistamiento náutico con formato.\n\n🎯 Qué hacer:\n- Declará una variable <code class=\"inl\">String</code> con el nombre del barco y mostrala usando <b>concatenación</b> (<code class=\"inl\">\"Barco: \" + barco</code>)\n- Usá <code class=\"inl\">System.out.printf</code> con un marcador <code class=\"inl\">%s</code> y otro <code class=\"inl\">%d</code> (por ejemplo, nombre del capitán y cantidad de pasajeros)\n- Usá la secuencia <code class=\"inl\">\\t</code> (tabulación) en algún texto\n- Usá la secuencia <code class=\"inl\">\\n</code> (salto de línea) en algún texto",
+  "inicial": "public class Main {\n  public static void main(String[] args) {\n    // Tu código acá\n\n  }\n}\n",
+  "checks": [
+   [
+    "String\\s+\\w+\\s*=\\s*\"",
+    "Una variable String con valor",
+    1,
+    false
+   ],
+   [
+    "\"[^\"]*\"\\s*\\+\\s*\\w+",
+    "Concatenación con + (\"texto\" + variable)",
+    1,
+    false
+   ],
+   [
+    "System\\.out\\.printf\\s*\\(",
+    "Al menos 1 System.out.printf(...)",
+    1,
+    false
+   ],
+   [
+    "%s",
+    "Marcador %s presente",
+    1,
+    false
+   ],
+   [
+    "%d",
+    "Marcador %d presente",
+    1,
+    false
+   ],
+   [
+    "\\\\t",
+    "Secuencia de escape tabulación",
+    1,
+    false
+   ],
+   [
+    "\\\\n",
+    "Secuencia de escape salto de línea",
+    1,
+    false
+   ]
+  ],
+  "salida": "Barco: Gaviota\nCapitán:\tRoberto\nPasajeros: 4\nAvistado: {NOMBRE}",
+  "exito": "✔ Registro impecable. La boya sigue oxidada, pero tu salida quedó prolija."
+ },
+ {
+  "id": "u3",
+  "num": "PISTA 03",
+  "titulo": "El Locutorio de la Esquina",
+  "icono": "☎️",
+  "tema": "Datos de entrada: la clase Scanner",
+  "xp": 100,
+  "log": "Te metés en el único locutorio abierto del barrio. Mientras esperás la línea, tu programa tiene que dejar de hablar SOLO y empezar a ESCUCHAR: pedirle datos al usuario y guardarlos. Todo para anotar lo que sabés de {NOMBRE}.",
+  "teoria": [
+   {
+    "h": "¿Cómo lee datos un programa?",
+    "p": "Los datos de entrada se leen con la clase <code class=\"inl\">Scanner</code>. Primero hay que <b>importarla</b> (<code class=\"inl\">import java.util.Scanner;</code>, arriba de todo) y después <b>crear un objeto</b> conectado al teclado: <code class=\"inl\">new Scanner(System.in)</code>. Para leer se usan sus métodos: <code class=\"inl\">nextLine()</code> lee una línea de texto y <code class=\"inl\">nextInt()</code> lee un número entero."
+   },
+   {
+    "c": "import java.util.Scanner;\n\npublic class Main {\n  public static void main(String[] args) {\n    Scanner sc = new Scanner(System.in);\n    System.out.print(\"Alias del contacto: \");\n    String alias = sc.nextLine();\n    System.out.print(\"Edad: \");\n    int edad = sc.nextInt();\n    System.out.println(alias + \" tiene \" + edad);\n  }\n}",
+    "s": "Alias del contacto: Sombra\nEdad: 34\nSombra tiene 34"
+   },
+   {
+    "p": "Antes de cada lectura conviene mostrar un mensaje con <code class=\"inl\">print</code> que diga QUÉ hay que ingresar. Sin ese mensaje, el programa se queda esperando en silencio."
+   },
+   {
+    "d": "🔍 Lo que se lee tiene que guardarse en una variable del tipo correcto (texto en String, entero en int). Si no lo guardás, se pierde."
+   }
+  ],
+  "consigna": "🎯 Qué hacer: armá un programa que anote los datos de contacto de {NOMBRE}:\n- Importá <code class=\"inl\">java.util.Scanner</code> y creá un <code class=\"inl\">Scanner</code> conectado a <code class=\"inl\">System.in</code>\n- Pedí con <code class=\"inl\">System.out.print</code> el <b>alias del contacto</b> y leelo con <code class=\"inl\">nextLine()</code> en una variable <code class=\"inl\">String</code>\n- Pedí su <b>edad</b> y leela con <code class=\"inl\">nextInt()</code> en una variable <code class=\"inl\">int</code>\n- Mostrá ambos datos con <code class=\"inl\">System.out.println</code>",
+  "inicial": "// Acordate del import de Scanner arriba de todo\n\npublic class Main {\n  public static void main(String[] args) {\n    // Tu código acá\n\n  }\n}\n",
+  "checks": [
+   [
+    "import\\s+java\\.util\\.(Scanner|\\*)\\s*;",
+    "import java.util.Scanner;",
+    1,
+    false
+   ],
+   [
+    "new\\s+Scanner\\s*\\(\\s*System\\.in\\s*\\)",
+    "Scanner creado con new Scanner(System.in)",
+    1,
+    false
+   ],
+   [
+    "String\\s+\\w+\\s*=\\s*\\w+\\.nextLine\\s*\\(\\s*\\)",
+    "Un String leído con nextLine()",
+    1,
+    false
+   ],
+   [
+    "int\\s+\\w+\\s*=\\s*\\w+\\.nextInt\\s*\\(\\s*\\)",
+    "Un int leído con nextInt()",
+    1,
+    false
+   ],
+   [
+    "System\\.out\\.print\\s*\\(",
+    "Mensajes de pedido con System.out.print",
+    2,
+    false
+   ],
+   [
+    "System\\.out\\.println\\s*\\(",
+    "Mostrar los datos con println",
+    1,
+    false
+   ]
+  ],
+  "salida": "Alias del contacto: Sombra\nEdad: 34\nSombra tiene 34",
+  "exito": "✔ El programa escuchó, guardó y mostró. La servilleta con los datos ya no hace falta."
+ },
+ {
+  "id": "u4",
+  "num": "PISTA 04",
+  "titulo": "La Azotea de Enfrente",
+  "icono": "🏢",
+  "tema": "Tipos de dato y lectura: int, double y String",
+  "xp": 100,
+  "log": "Con los binoculares apoyados en el borde del edificio de enfrente, vigilás la oficina donde entró {NOMBRE}. Cada dato que observás tiene un tipo distinto —un texto, un número entero, un número con decimales— y tu programa tiene que leerlos como corresponde.",
+  "teoria": [
+   {
+    "h": "Cada dato, su método",
+    "p": "El método de lectura tiene que coincidir con el tipo de la variable: <code class=\"inl\">nextInt()</code> → <code class=\"inl\">int</code> (enteros), <code class=\"inl\">nextDouble()</code> → <code class=\"inl\">double</code> (decimales) y <code class=\"inl\">nextLine()</code> → <code class=\"inl\">String</code> (línea completa). Según la configuración regional de la computadora, los decimales se escriben con coma o con punto."
+   },
+   {
+    "c": "Scanner sc = new Scanner(System.in);\nSystem.out.print(\"Piso: \");\nint piso = sc.nextInt();\nSystem.out.print(\"Distancia (m): \");\ndouble dist = sc.nextDouble();\nsc.nextLine();\nSystem.out.print(\"Oficina: \");\nString oficina = sc.nextLine();\nSystem.out.println(oficina + \" - piso \" + piso + \" - \" + dist + \" m\");",
+    "s": "Piso: 7\nDistancia (m): 21,5\nOficina: Contaduría\nContaduría - piso 7 - 21.5 m"
+   },
+   {
+    "p": "Ese <code class=\"inl\">sc.nextLine();</code> suelto sirve para <b>descartar el salto de línea</b> que dejó pendiente <code class=\"inl\">nextDouble()</code>. Sin él, el siguiente <code class=\"inl\">nextLine()</code> devuelve un texto vacío."
+   },
+   {
+    "d": "🔍 Trampa clásica: leer un número y después un String con nextLine() sin limpiar el buffer. El programa \"se salta\" la entrada y no da ningún error."
+   }
+  ],
+  "consigna": "🎯 Qué hacer: un programa (con su import y su Scanner) que lea y muestre:\n- Un <b>int</b> con <code class=\"inl\">nextInt()</code>: el piso donde está la oficina\n- Un <b>double</b> con <code class=\"inl\">nextDouble()</code>: la distancia en metros hasta la ventana\n- Un <b>String</b> con <code class=\"inl\">nextLine()</code>: el lugar donde está {NOMBRE} — se lee DESPUÉS de los números, así que tenés que limpiar el buffer con un <code class=\"inl\">nextLine()</code> extra\n- Mostrá los tres datos en una sola línea con concatenación",
+  "inicial": "// Acordate del import de Scanner arriba de todo\n\npublic class Main {\n  public static void main(String[] args) {\n    // Tu código acá\n\n  }\n}\n",
+  "checks": [
+   [
+    "import\\s+java\\.util\\.(Scanner|\\*)\\s*;",
+    "import java.util.Scanner;",
+    1,
+    false
+   ],
+   [
+    "new\\s+Scanner\\s*\\(\\s*System\\.in\\s*\\)",
+    "Scanner creado con new Scanner(System.in)",
+    1,
+    false
+   ],
+   [
+    "int\\s+\\w+\\s*=\\s*\\w+\\.nextInt\\s*\\(\\s*\\)",
+    "Un int leído con nextInt()",
+    1,
+    false
+   ],
+   [
+    "double\\s+\\w+\\s*=\\s*\\w+\\.nextDouble\\s*\\(\\s*\\)",
+    "Un double leído con nextDouble()",
+    1,
+    false
+   ],
+   [
+    "\\w+\\.nextLine\\s*\\(\\s*\\)\\s*;",
+    "Dos nextLine(): uno para limpiar el buffer y otro para leer el texto",
+    2,
+    false
+   ],
+   [
+    "\"[^\"]*\"\\s*\\+|\\+\\s*\"[^\"]*\"",
+    "Concatenación para mostrar los tres datos",
+    1,
+    false
+   ]
+  ],
+  "salida": "Piso: 7\nDistancia (m): 21,5\nLugar: Contaduría\nContaduría - piso 7 - 21.5 m",
+  "exito": "✔ Tres tipos de dato, tres lecturas, cero sorpresas en el buffer. La oficina queda bajo vigilancia."
+ },
+ {
+  "id": "u5",
+  "num": "PISTA 05",
+  "titulo": "El Parque de Perros",
+  "icono": "🐕",
+  "tema": "Operadores matemáticos: + - * /",
+  "xp": 100,
+  "log": "Descubriste la rutina: todas las tardes {NOMBRE} pasea al perro por este parque. Te disfrazaste de paseador/a profesional —seis correas, ningún perro real— y ahora tenés que hacer las cuentas: cuántas vueltas, cuánto tiempo.",
+  "teoria": [
+   {
+    "h": "Los operadores aritméticos",
+    "p": "Java trae cuatro operadores básicos: <code class=\"inl\">+</code> suma, <code class=\"inl\">-</code> resta, <code class=\"inl\">*</code> multiplica y <code class=\"inl\">/</code> divide. El resultado se guarda con <code class=\"inl\">=</code> (asignación): la cuenta se resuelve a la derecha y el valor queda en la variable de la izquierda."
+   },
+   {
+    "c": "int perros = 6;\nint vueltas = 4;\nint total = perros * vueltas;\nint resta = total - 5;\nint suma = total + perros;\ndouble mitad = total / 2.0;\nSystem.out.println(total + \" \" + resta + \" \" + suma + \" \" + mitad);",
+    "s": "24 19 30 12.0"
+   },
+   {
+    "p": "Con enteros, la división se <b>trunca</b>: <code class=\"inl\">7 / 2</code> da <code class=\"inl\">3</code>, no 3.5. Para obtener decimales, al menos uno de los dos números tiene que ser <code class=\"inl\">double</code> (<code class=\"inl\">7 / 2.0</code> da <code class=\"inl\">3.5</code>)."
+   },
+   {
+    "d": "🔍 int / int da int. Es el error de cálculo más silencioso de Java: el programa compila, corre... y da mal."
+   }
+  ],
+  "consigna": "Datos del parque: <b>4 vueltas</b> por perro, <b>35 minutos</b> de paseo, <b>12 minutos</b> de descanso y <b>6 perros</b>.\n\n🎯 Qué hacer: declará variables y calculá usando los <b>cuatro operadores</b>, cada cuenta en una instrucción distinta y guardada en una variable:\n- Total de vueltas = perros * vueltas (multiplicación)\n- Minutos totales = paseo + descanso (suma)\n- Diferencia = paseo - descanso (resta)\n- Minutos por vuelta = paseo / vueltas (división: usá <code class=\"inl\">double</code> para no perder los decimales)\n\nMostrá cada resultado con <code class=\"inl\">System.out.println</code>.",
+  "inicial": "public class Main {\n  public static void main(String[] args) {\n    // Tu código acá\n\n  }\n}\n",
+  "checks": [
+   [
+    "=\\s*[^;]*[\\w)]\\s*\\+\\s*[\\w(]",
+    "Una suma guardada en una variable (+)",
+    1,
+    false,
+    true
+   ],
+   [
+    "=\\s*[^;]*[\\w)]\\s*-\\s*[\\w(]",
+    "Una resta guardada en una variable (-)",
+    1,
+    false,
+    true
+   ],
+   [
+    "=\\s*[^;]*[\\w)]\\s*\\*\\s*[\\w(]",
+    "Una multiplicación guardada en una variable (*)",
+    1,
+    false,
+    true
+   ],
+   [
+    "=\\s*[^;]*[\\w)]\\s*/\\s*[\\w(]",
+    "Una división guardada en una variable (/)",
+    1,
+    false,
+    true
+   ],
+   [
+    "\\bdouble\\s+\\w+\\s*=",
+    "Al menos una variable double",
+    1,
+    false,
+    true
+   ],
+   [
+    "System\\.out\\.print(ln)?\\s*\\(",
+    "Resultados mostrados con System.out.println",
+    3,
+    false
+   ]
+  ],
+  "salida": "Total de vueltas: 24\nMinutos totales: 47\nDiferencia: 23\nMinutos por vuelta: 8.75",
+  "exito": "✔ Cuentas claras. Ningún perro fue paseado en el proceso, pero los números cierran."
+ },
+ {
+  "id": "u6",
+  "num": "PISTA 06",
+  "titulo": "Zona de Arribos",
+  "icono": "✈️",
+  "tema": "Resto (%), división entera y casting",
+  "xp": 100,
+  "log": "{NOMBRE} vuelve de gira. Te mezclás entre los que esperan con carteles —el tuyo dice \"BIENVENIDO TÍO ROBERTO\" para disimular— y tenés que repartir a los fotógrafos entre las puertas de salida sin que sobre ninguno.",
+  "teoria": [
+   {
+    "h": "El operador % y el casting",
+    "p": "El operador <code class=\"inl\">%</code> (módulo) devuelve el <b>resto</b> de una división entera: <code class=\"inl\">17 % 5</code> da <code class=\"inl\">2</code>. Sirve, por ejemplo, para saber si un número es par (<code class=\"inl\">n % 2</code> da 0). El <b>casting</b> convierte un tipo en otro: <code class=\"inl\">(double) 7 / 2</code> convierte el 7 a double ANTES de dividir."
+   },
+   {
+    "c": "int fotografos = 17;\nint puertas = 5;\nint porPuerta = fotografos / puertas;\nint sobran = fotografos % puertas;\ndouble exacto = (double) fotografos / puertas;\nSystem.out.println(porPuerta + \" por puerta, sobran \" + sobran);\nSystem.out.println(\"Exacto: \" + exacto);",
+    "s": "3 por puerta, sobran 2\nExacto: 3.4"
+   },
+   {
+    "p": "Ojo con el orden: <code class=\"inl\">(double) (a / b)</code> divide primero (y trunca) y convierte después; <code class=\"inl\">(double) a / b</code> convierte primero y divide con decimales."
+   },
+   {
+    "d": "🔍 Con enteros, / da el cociente y % da el resto. Juntos reconstruyen el número: cociente × divisor + resto = dividendo."
+   }
+  ],
+  "consigna": "🎯 Qué hacer: pedí por teclado (con <code class=\"inl\">Scanner</code>) la cantidad de <b>fotógrafos</b> y la cantidad de <b>puertas</b> (ambos <code class=\"inl\">int</code>) y mostrá:\n- Cuántos fotógrafos le tocan a cada puerta (división entera con <code class=\"inl\">/</code>)\n- Cuántos sobran (operador <code class=\"inl\">%</code>)\n- El reparto exacto con decimales, usando casting <code class=\"inl\">(double)</code>\n- Si la cantidad de fotógrafos es par o impar, mostrando el resultado de <code class=\"inl\">fotografos % 2</code>",
+  "inicial": "// Acordate del import de Scanner arriba de todo\n\npublic class Main {\n  public static void main(String[] args) {\n    // Tu código acá\n\n  }\n}\n",
+  "checks": [
+   [
+    "import\\s+java\\.util\\.(Scanner|\\*)\\s*;",
+    "import java.util.Scanner;",
+    1,
+    false
+   ],
+   [
+    "new\\s+Scanner\\s*\\(\\s*System\\.in\\s*\\)",
+    "Scanner creado con new Scanner(System.in)",
+    1,
+    false
+   ],
+   [
+    "\\.nextInt\\s*\\(\\s*\\)",
+    "Dos datos leídos con nextInt()",
+    2,
+    false
+   ],
+   [
+    "[\\w)]\\s*%\\s*[\\w(]",
+    "Operador % usado 2 veces (sobrantes y par/impar)",
+    2,
+    false,
+    true
+   ],
+   [
+    "[\\w)]\\s*/\\s*[\\w(]",
+    "División con /",
+    1,
+    false,
+    true
+   ],
+   [
+    "\\(\\s*double\\s*\\)",
+    "Casting (double)",
+    1,
+    false,
+    true
+   ]
+  ],
+  "salida": "Fotógrafos: 17\nPuertas: 5\n3 por puerta, sobran 2\nExacto: 3.4\nFotógrafos % 2 = 1 (impar)",
+  "exito": "✔ Reparto completo: cada puerta cubierta y los sobrantes acomodados. Seguridad ni se enteró."
+ },
+ {
+  "id": "u7",
+  "num": "PISTA 07",
+  "titulo": "Feria de Choripanes",
+  "icono": "🎪",
+  "tema": "Precedencia, paréntesis y operadores compuestos (+=, ++)",
+  "xp": 100,
+  "log": "La pista más rara hasta ahora: \"va a estar en la feria, disfrazado/a de estatua viviente\". Escondido/a detrás de un puesto de choripanes, llevás las cuentas: cuánta gente se saca foto con la \"estatua\" y cuánto gastás mientras esperás.",
+  "teoria": [
+   {
+    "h": "Precedencia y operadores compuestos",
+    "p": "Java respeta el orden matemático: primero <code class=\"inl\">*</code>, <code class=\"inl\">/</code> y <code class=\"inl\">%</code>; después <code class=\"inl\">+</code> y <code class=\"inl\">-</code>. Los <b>paréntesis</b> cambian ese orden: lo que está adentro se resuelve primero. Los <b>operadores compuestos</b> abrevian cuentas sobre la misma variable: <code class=\"inl\">x += 3</code> equivale a <code class=\"inl\">x = x + 3</code>, y <code class=\"inl\">x++</code> suma 1 (<code class=\"inl\">x--</code> resta 1)."
+   },
+   {
+    "c": "int choris = 4;\nint precio = 120;\nint a = 10 + choris * precio;\nint b = (10 + choris) * precio;\nint gastado = 0;\ngastado += precio;\ngastado *= 2;\nchoris++;\nSystem.out.println(a + \" \" + b + \" \" + gastado + \" \" + choris);",
+    "s": "490 1680 240 5"
+   },
+   {
+    "p": "Existe un compuesto para cada operador: <code class=\"inl\">+=</code>, <code class=\"inl\">-=</code>, <code class=\"inl\">*=</code>, <code class=\"inl\">/=</code> y <code class=\"inl\">%=</code>."
+   },
+   {
+    "d": "🔍 Ante la duda, paréntesis: no cuestan nada y evitan que el programa haga una cuenta distinta a la que pensaste."
+   }
+  ],
+  "consigna": "🎯 Qué hacer: la feria vende choripanes a $120 y gaseosas a $80. Armá un programa con variables (sin Scanner) que:\n- Calcule el total de <b>3 choripanes y 2 gaseosas</b> en UNA sola expresión que combine <code class=\"inl\">*</code> con <code class=\"inl\">+</code> (la multiplicación se resuelve primero)\n- Calcule el total con <b>10% de descuento</b> usando <b>paréntesis</b>: <code class=\"inl\">(choripanes + gaseosas) * 0.9</code>\n- Use un operador compuesto (<code class=\"inl\">+=</code>, <code class=\"inl\">-=</code>, <code class=\"inl\">*=</code>, <code class=\"inl\">/=</code> o <code class=\"inl\">%=</code>) para acumular una propina\n- Use <code class=\"inl\">++</code> o <code class=\"inl\">--</code> para sumar una foto más con la \"estatua\"\n\nMostrá cada resultado con <code class=\"inl\">System.out.println</code>.",
+  "inicial": "public class Main {\n  public static void main(String[] args) {\n    // Tu código acá\n\n  }\n}\n",
+  "checks": [
+   [
+    "=\\s*[^;]*[\\w)]\\s*[*/]\\s*[\\w(][^;]*[\\w)]\\s*[+-]\\s*[\\w(]|=\\s*[^;]*[\\w)]\\s*[+-]\\s*[\\w(][^;]*[\\w)]\\s*[*/]\\s*[\\w(]",
+    "Una expresión que combina * o / con + o - (precedencia)",
+    1,
+    false,
+    true
+   ],
+   [
+    "=\\s*[^;]*\\([^;()]*[+-][^;()]*\\)\\s*[*/]|=\\s*[^;]*[*/]\\s*\\([^;()]*[+-][^;()]*\\)",
+    "Paréntesis que cambian el orden de la cuenta",
+    1,
+    false,
+    true
+   ],
+   [
+    "\\bdouble\\s+\\w+\\s*=",
+    "Variable double para el total con descuento",
+    1,
+    false,
+    true
+   ],
+   [
+    "(\\+=|-=|\\*=|/=|%=)",
+    "Un operador compuesto (+=, -=, *=, /= o %=)",
+    1,
+    false,
+    true
+   ],
+   [
+    "(\\+\\+|--)",
+    "Un ++ o un --",
+    1,
+    false,
+    true
+   ],
+   [
+    "System\\.out\\.print(ln)?\\s*\\(",
+    "Resultados mostrados con System.out.println",
+    3,
+    false
+   ]
+  ],
+  "salida": "Total: 520\nCon descuento: 468.0\nPropina acumulada: 50\nFotos con la estatua: 13",
+  "exito": "✔ La \"estatua\" nunca se dio cuenta. Choripán de premio para vos (con el vuelto bien calculado)."
+ },
+ {
+  "id": "u8",
+  "num": "PISTA 08",
+  "titulo": "La Redacción",
+  "icono": "📰",
+  "tema": "Integración: entrada, proceso y salida",
+  "xp": 100,
+  "log": "Volviste con la libreta llena y quince minutos antes del cierre. Ahora hay que convertir todo ese caos sobre {NOMBRE} en <b>un programa completo</b>: que lea datos, calcule y presente el resultado, así la redacción hace las cuentas de la edición en un instante.",
+  "teoria": [
+   {
+    "h": "Entrada → Proceso → Salida",
+    "p": "Un programa completo tiene tres etapas: <b>entrada</b> (leer datos con <code class=\"inl\">Scanner</code>), <b>proceso</b> (calcular con operadores) y <b>salida</b> (mostrar con <code class=\"inl\">println</code> o <code class=\"inl\">printf</code>). Pensarlo en ese orden evita la mayoría de los errores."
+   },
+   {
+    "c": "Scanner sc = new Scanner(System.in);\nSystem.out.print(\"Precio: \");\ndouble precio = sc.nextDouble();\nSystem.out.print(\"Cantidad: \");\nint cant = sc.nextInt();\ndouble total = precio * cant;\nSystem.out.printf(\"Total: %.2f%n\", total);",
+    "s": "Precio: 49,5\nCantidad: 3\nTotal: 148,50"
+   },
+   {
+    "p": "El marcador <code class=\"inl\">%.2f</code> muestra un número decimal con <b>2 decimales</b>."
+   },
+   {
+    "d": "🔍 Si tenés claro qué entra, qué se calcula y qué sale, el código se escribe solo."
+   }
+  ],
+  "consigna": "🎯 Qué hacer: el programa \"Cierre de edición\" tiene que:\n1. Importar <code class=\"inl\">Scanner</code> y crear el objeto\n2. <b>Pedir 2 números</b> con mensajes claros (<code class=\"inl\">nextInt()</code> o <code class=\"inl\">nextDouble()</code>)\n3. Calcular y guardar la <b>suma, resta, multiplicación, división y resto</b> (los cinco operadores)\n4. Usar al menos una variable <code class=\"inl\">double</code> para que la división no pierda decimales\n5. Mostrar los resultados, con al menos uno mostrado mediante <code class=\"inl\">System.out.printf</code>",
+  "inicial": "// Acordate del import de Scanner arriba de todo\n\npublic class Main {\n  public static void main(String[] args) {\n    // Tu código acá\n\n  }\n}\n",
+  "checks": [
+   [
+    "import\\s+java\\.util\\.(Scanner|\\*)\\s*;",
+    "import java.util.Scanner;",
+    1,
+    false
+   ],
+   [
+    "new\\s+Scanner\\s*\\(\\s*System\\.in\\s*\\)",
+    "Scanner creado con new Scanner(System.in)",
+    1,
+    false
+   ],
+   [
+    "\\.next(Int|Double)\\s*\\(\\s*\\)",
+    "Dos números leídos con nextInt() o nextDouble()",
+    2,
+    false
+   ],
+   [
+    "[\\w)]\\s*\\+\\s*[\\w(]",
+    "Suma (+)",
+    1,
+    false,
+    true
+   ],
+   [
+    "[\\w)]\\s*-\\s*[\\w(]",
+    "Resta (-)",
+    1,
+    false,
+    true
+   ],
+   [
+    "[\\w)]\\s*\\*\\s*[\\w(]",
+    "Multiplicación (*)",
+    1,
+    false,
+    true
+   ],
+   [
+    "[\\w)]\\s*/\\s*[\\w(]",
+    "División (/)",
+    1,
+    false,
+    true
+   ],
+   [
+    "[\\w)]\\s*%\\s*[\\w(]",
+    "Resto (%)",
+    1,
+    false,
+    true
+   ],
+   [
+    "\\bdouble\\s+\\w+",
+    "Al menos una variable double",
+    1,
+    false,
+    true
+   ],
+   [
+    "System\\.out\\.printf\\s*\\(",
+    "Al menos un System.out.printf(...)",
+    1,
+    false
+   ]
+  ],
+  "mostrarChecklist": true,
+  "salida": "Primer número: 17\nSegundo número: 5\nSuma: 22\nResta: 12\nMultiplicación: 85\nDivisión: 3.40\nResto: 2",
+  "exito": "✔ EL PROGRAMA ESTÁ LISTO. Edición cerrada a tiempo. {NOMBRE} nunca sabrá cómo hiciste esto."
+ },
+ {
+  "id": "ins",
+  "num": "🎬 ALFOMBRA ROJA",
+  "titulo": "La Exclusiva del Siglo",
+  "icono": "🎬",
+  "xp": 350,
+  "insano": true,
+  "log": "Te infiltraste en el evento del año: smoking prestado, acreditación falsificada a mano, una sola oportunidad antes de que te descubran. Esta es la nota que te hace leyenda —o el final de tu carrera—. Nadie te va a guiar acá adentro.",
+  "teoria": [
+   {
+    "h": "Requisitos de la Alfombra Roja",
+    "p": "Todo lo de las Pistas 1-8, PLUS la clase <code class=\"inl\">Math</code> de Java, que vas a tener que investigar por tu cuenta."
+   },
+   {
+    "d": "🎬 Buscá en la documentación (API) de Java la clase <code class=\"inl\">Math</code>: potencias, raíz cuadrada, redondeo, valor absoluto y la constante π. Sin ejemplos de código esta vez — pero sí con la pista de dónde mirar."
+   }
+  ],
+  "consigna": "Programa \"Cámara oculta\" para {NOMBRE}: el objetivo se mueve en un plano y tenés que calcular a qué distancia está de tu cámara.\n\n1. Leer con <code class=\"inl\">Scanner</code> las coordenadas <b>x1, y1</b> (tu cámara) y <b>x2, y2</b> (el objetivo), todas <code class=\"inl\">double</code>\n2. Calcular la distancia: raíz cuadrada de (x2-x1)² + (y2-y1)², usando <code class=\"inl\">Math.sqrt</code> y <code class=\"inl\">Math.pow</code>\n3. Calcular el área de un círculo de cobertura con radio = distancia, usando <code class=\"inl\">Math.PI</code>\n4. Redondear la distancia con <code class=\"inl\">Math.round</code> y mostrarla\n5. Usar <code class=\"inl\">Math.abs</code> (o <code class=\"inl\">Math.max</code> / <code class=\"inl\">Math.min</code>) en algún cálculo, por ejemplo la diferencia horizontal en valor absoluto\n6. Mostrar al menos un resultado con <code class=\"inl\">System.out.printf</code> y el marcador <code class=\"inl\">%.2f</code>",
+  "inicial": "// Acordate del import de Scanner arriba de todo\n\npublic class Main {\n  public static void main(String[] args) {\n    // Tu código acá\n\n  }\n}\n",
+  "checks": [
+   [
+    "import\\s+java\\.util\\.(Scanner|\\*)\\s*;",
+    "import java.util.Scanner;",
+    1,
+    false
+   ],
+   [
+    "new\\s+Scanner\\s*\\(\\s*System\\.in\\s*\\)",
+    "Scanner creado con new Scanner(System.in)",
+    1,
+    false
+   ],
+   [
+    "\\.nextDouble\\s*\\(\\s*\\)",
+    "Cuatro coordenadas leídas con nextDouble()",
+    4,
+    false
+   ],
+   [
+    "Math\\.sqrt\\s*\\(",
+    "Math.sqrt",
+    1,
+    false
+   ],
+   [
+    "Math\\.pow\\s*\\(",
+    "Math.pow",
+    1,
+    false
+   ],
+   [
+    "Math\\.PI",
+    "Math.PI",
+    1,
+    false
+   ],
+   [
+    "Math\\.round\\s*\\(",
+    "Math.round",
+    1,
+    false
+   ],
+   [
+    "Math\\.(abs|max|min)\\s*\\(",
+    "Math.abs, Math.max o Math.min",
+    1,
+    false
+   ],
+   [
+    "printf\\s*\\([^;]*%\\.\\d+f",
+    "printf con un marcador de 2 decimales (%.2f)",
+    1,
+    false
+   ]
+  ],
+  "salida": "x1: 0\ny1: 0\nx2: 3\ny2: 4\nDistancia: 5.00\nDistancia redondeada: 5\nÁrea de cobertura: 78.54",
+  "exito": "✔ LA EXCLUSIVA DEL SIGLO. Tu nombre entra en la leyenda de Ojo de Halcón."
+ }
 ];
 
 // ============= ESTADO GLOBAL =============
@@ -731,7 +1197,7 @@ let estadoJuego = {
     zonaActual: null,
     mascara: 0,
     xpTotal: 0,
-    codigos: {},   // guarda el código HTML final de cada pista superada: { u1: "...", u2: "...", ... }
+    codigos: {},   // guarda el código Java final de cada pista superada: { u1: "...", u2: "...", ... }
     borradores: {}, // guarda lo que el estudiante va escribiendo en cada pista, esté o no superada todavía
     saltadas: {}    // pistas que el estudiante decidió NO hacer: { u3: true, ... } — cada una resta 3 puntos
 };
@@ -873,25 +1339,22 @@ function abrirZona(idx) {
     document.getElementById('nvTitulo').textContent = `${nv.icono} ${nv.num} · ${nv.titulo}`;
     document.getElementById('nvXp').textContent = `+${nv.xp} XP`;
     document.getElementById('nvLog').innerHTML = narrar(nv.log);
-    document.getElementById('nvArchivo').textContent = nv.titulo.toLowerCase().replace(/\s+/g, '-') + '.html';
+    document.getElementById('nvArchivo').textContent = 'Main.java';
     document.getElementById('nvConsigna').innerHTML = narrar(nv.consigna);
 
-    const demosPreview = []; // guarda el HTML real (sin entidades) de cada ejemplo, para previsualizarlo después
     let teoriasHTML = '<div style="margin-bottom:18px">';
     nv.teoria.forEach(t => {
         if (t.h) teoriasHTML += `<div class="teoria-caja"><div class="teoria-cab"><span class="ico">📰</span><span class="tit">${t.h}</span><span class="flecha">▼</span></div><div class="teoria-cuerpo"><div class="teoria-inner"><div class="bloque-teoria"><p>${t.p || ''}</p></div></div></div></div>`;
         else if (t.p) teoriasHTML += `<p style="line-height:1.7; margin:12px 0; color:rgb(55,45,35)">${t.p}</p>`;
         else if (t.c) {
-            const idxDemo = demosPreview.length;
-            demosPreview.push(decodeEntidadesHTML(t.c));
             teoriasHTML += `<div class="cod-demo">
                 <div class="cod-wrap">
-                  <div class="cod-badge">🔒 Solo lectura — no se puede copiar. Escribí vos la etiqueta.</div>
-                  <pre class="cod noselect"><span class="tk-tag">${t.c}</span></pre>
+                  <div class="cod-badge">🔒 Solo lectura — no se puede copiar. Escribí vos el código.</div>
+                  <pre class="cod noselect">${tokenizarJava(t.c)}</pre>
                 </div>
                 <div class="cod-preview">
-                  <div class="cp-cab">👁 Así se ve en el navegador</div>
-                  <iframe id="codDemo${idxDemo}" title="Vista previa del ejemplo"></iframe>
+                  <div class="cp-cab">🖥 Así se ve en la consola</div>
+                  <pre class="cod noselect" style="margin:0; border-radius:0; flex:1; min-height:90px">${escaparHTML(t.s || '')}</pre>
                 </div>
               </div>`;
         }
@@ -899,11 +1362,6 @@ function abrirZona(idx) {
     });
     teoriasHTML += '</div>';
     document.getElementById('nvTeoria').innerHTML = narrar(teoriasHTML);
-
-    demosPreview.forEach((codigo, i) => {
-        const frame = document.getElementById('codDemo' + i);
-        if (frame) frame.srcdoc = construirHTMLPreview(codigo, true);
-    });
 
     document.querySelectorAll('.teoria-cab').forEach(cab => {
         cab.addEventListener('click', () => cab.parentElement.classList.toggle('abierta'));
@@ -939,7 +1397,7 @@ function abrirZona(idx) {
 let _guardarBorradorDebounce = null;
 function tokenizarEnVivo() {
     const codigo = document.getElementById('edTxt').value;
-    document.getElementById('edHl').innerHTML = tokenizarHTML(codigo);
+    document.getElementById('edHl').innerHTML = tokenizarJava(codigo);
 
     if (estadoJuego.zonaActual !== null) {
         const nv = NIVELES[estadoJuego.zonaActual];
@@ -966,22 +1424,20 @@ function actualizarChecklistMemoria(nv, codigo) {
     const items = chequeos.map(c =>
         `<div class="cm-item ${c.pasa ? 'hecho' : ''}">${c.pasa ? '✅' : '⬜'} ${c.msj}</div>`
     ).join('');
-    caja.innerHTML = `<div class="cm-titulo">🧠 Ayuda-memoria (se va tildando solo, no hace falta que apretes "Revisar Notas" para verlo)</div>${items}`;
+    caja.innerHTML = `<div class="cm-titulo">🧠 Ayuda-memoria (se va tildando solo, no hace falta que apretes "Revisar Código" para verlo)</div>${items}`;
     caja.style.display = 'block';
 }
 
-function tokenizarHTML(codigo) {
-    let html = escaparHTML(codigo);
-    html = html.replace(/&lt;!--[\s\S]*?--&gt;/g, (m) => `<span class="tk-com">${m}</span>`);
-    html = html.replace(/&lt;(\/?)([\w-]+)([^&]*?)(&gt;)/g, (m, barra, tag, resto, gt) => {
-        let resultado = `<span class="tk-tag">&lt;${barra}${tag}</span>`;
-        resto = resto.replace(/(\s+[\w-]+)(=)(["\']?)([^"\']*)\3/g, (am, atr, eq, cita, val) => {
-            return `<span class="tk-atr">${atr}</span>${eq}${cita}<span class="tk-val">${val}</span>${cita}`;
-        });
-        resultado += resto + `<span class="tk-tag">${gt}</span>`;
-        return resultado;
-    });
-    return html;
+function tokenizarJava(codigo) {
+    const re = /(\/\/[^\n]*|\/\*[\s\S]*?\*\/)|("(?:\\.|[^"\\\n])*")|\b(\d+(?:\.\d+)?[fFdDlL]?)\b|\b(public|class|static|void|import|new|final|return|if|else|for|while)\b|\b(int|double|float|long|char|boolean|String|Scanner|System|Math)\b/g;
+    let out = '', ultimo = 0, m;
+    while ((m = re.exec(codigo)) !== null) {
+        out += escaparHTML(codigo.slice(ultimo, m.index));
+        const cls = m[1] ? 'tk-com' : (m[2] || m[3]) ? 'tk-val' : m[4] ? 'tk-tag' : 'tk-atr';
+        out += `<span class="${cls}">${escaparHTML(m[0])}</span>`;
+        ultimo = re.lastIndex;
+    }
+    return out + escaparHTML(codigo.slice(ultimo));
 }
 
 function escaparHTML(texto) {
@@ -995,15 +1451,17 @@ function escaparHTML(texto) {
 
 // ============= VERIFICACIÓN =============
 // Evalúa los checks de una pista contra un código dado. Se usa tanto para la
-// verificación final (botón Revisar Notas) como para el checklist-memoria en vivo.
+// verificación final (botón Revisar Código) como para el checklist-memoria en vivo.
 function evaluarChecks(nv, codigo) {
     let todoOk = true;
-    const chequeos = nv.checks.map(([patron, msj, min, max]) => {
+    const sinComentarios = codigo.replace(/\/\*[\s\S]*?\*\/|\/\/[^\n]*/g, '');
+    const sinCadenas = sinComentarios.replace(/"(?:\\.|[^"\\\n])*"/g, '""');
+    const chequeos = nv.checks.map(([patron, msj, min, max, soloCodigo]) => {
         // max === false significa "sin tope": la consigna dice "al menos N",
         // así que agregar más de lo pedido (por ejemplo, un campo extra fijo
         // como el de "Fuente") nunca debe hacer fallar la revisión.
         const regex = new RegExp(patron, 'g');
-        const matches = (codigo.match(regex) || []).length;
+        const matches = ((soloCodigo ? sinCadenas : sinComentarios).match(regex) || []).length;
 
         let pasa = matches >= (min || 1);
         if (max !== false && max !== undefined) pasa = pasa && matches <= max;
@@ -1115,40 +1573,11 @@ function reiniciarEditor() {
     tokenizarEnVivo();
 }
 
-function construirHTMLPreview(codigo, compacto) {
-    const padding = compacto ? '12px' : '20px';
-    return `<!DOCTYPE html>
-<html lang="es">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Vista Previa</title>
-<style>
-body { font-family:Georgia,serif; background:#f4efe3; color:#2a2318; padding:${padding}; margin:0; font-size:${compacto ? '.85rem' : '1rem'}; }
-h1,h2,h3 { color:#8b1e1e; }
-label { font-weight:bold; display:block; margin-top:10px; }
-input, select, textarea { font-family:Arial,sans-serif; padding:${compacto ? '5px' : '8px'}; margin-top:4px; border:1px solid #ccc; border-radius:4px; width:100%; max-width:400px; box-sizing:border-box; font-size:${compacto ? '.82rem' : '1rem'}; }
-input[type=radio], input[type=checkbox] { width:auto; margin-right:6px; }
-fieldset { border:2px solid #8b1e1e; border-radius:6px; margin:${compacto ? '8px' : '14px'} 0; padding:${compacto ? '8px' : '12px'}; }
-legend { font-weight:bold; color:#8b1e1e; padding:0 8px; }
-button { background:#8b1e1e; color:white; border:none; padding:${compacto ? '7px 14px' : '10px 20px'}; border-radius:4px; margin-top:${compacto ? '8px' : '14px'}; cursor:pointer; font-weight:bold; }
-</style>
-</head>
-<body>
-${codigo}
-</body>
-</html>`;
-}
-
 function mostrarPreview() {
-    const codigo = document.getElementById('edTxt').value;
-    const iframe = document.getElementById('pvFrame');
-    iframe.srcdoc = construirHTMLPreview(codigo, false);
+    if (estadoJuego.zonaActual === null) return;
+    const nv = NIVELES[estadoJuego.zonaActual];
+    document.getElementById('pvFrame').textContent = narrar(nv.salida || '');
     document.getElementById('pvMarco').classList.add('vis');
-}
-
-function decodeEntidadesHTML(str) {
-    return str.replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&amp;/g, '&');
 }
 
 function volverMapa() {
@@ -1195,7 +1624,7 @@ function leerCodigoSesion(codigo) {
 // navegador para que, si el estudiante recarga la página sin haber descargado el
 // PDF, el campo de credencial ya aparezca completo — no se auto-restaura el juego,
 // solo se evita perder el código.
-const CLAVE_SESION_LOCAL = 'ojoDeHalcon_credencial';
+const CLAVE_SESION_LOCAL = 'ojoDeHalcon_java_credencial';
 
 function guardarSesionLocal() {
     if (!estadoJuego.reportero) return; // todavía no arrancó ninguna persecución
@@ -1268,7 +1697,7 @@ function restaurarProgreso() {
     estadoJuego.zonaActual = null;
 
     // Si ese mismo código quedó guardado en este navegador, recuperamos también
-    // el código HTML de cada pista (superada o en borrador) — no solo el puntaje.
+    // el código Java de cada pista (superada o en borrador) — no solo el puntaje.
     try {
         const crudo = localStorage.getItem(CLAVE_SESION_LOCAL);
         const datos = crudo ? JSON.parse(crudo) : null;
@@ -1342,7 +1771,7 @@ function descargarPDF() {
 
     doc.setTextColor(200, 190, 170);
     doc.setFontSize(8);
-    doc.text('Formularios HTML - Ciencias de la Computacion', 14, 33);
+    doc.text('Java - Datos de entrada, salida y operadores matematicos', 14, 33);
 
     y = 48;
     doc.setFont('helvetica', 'normal');
@@ -1398,7 +1827,7 @@ function descargarPDF() {
     doc.setFont('helvetica', 'bold');
     doc.setFontSize(12);
     doc.setTextColor(30, 25, 20);
-    doc.text('FORMULARIOS REDACTADOS', 14, y);
+    doc.text('CODIGO JAVA REALIZADO', 14, y);
     y += 8;
 
     const pistasCompletadas = NIVELES.slice(0, 9).filter((nv, i) => (estadoJuego.mascara & (1 << i)) !== 0);
